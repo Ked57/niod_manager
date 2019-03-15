@@ -5,6 +5,7 @@
   "author": "Clément Fassot (kedthunder@gmail.com)",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
