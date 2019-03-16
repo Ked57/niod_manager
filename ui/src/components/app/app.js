@@ -35,8 +35,8 @@ const styles = theme => ({
     marginLeft: -12,
     marginRight: 20
   },
-  paper: {
-    margin: "10px"
+  paperContent: {
+    margin: 10
   },
   primary: {},
   icon: {}
@@ -80,13 +80,15 @@ const App = props => {
           <Grid item xs />
         )}
         <Grid item xs={8}>
-          <Paper paper>
-            <p>Here goes the content</p>
+          <Paper>
+            <div className={classes.paperContent}>Here goes the content</div>
           </Paper>
         </Grid>
         <Grid item xs>
-          <Paper paper>
-            <p>Here goes the server status, it's fixed</p>
+          <Paper>
+            <div className={classes.paperContent}>
+              Here goes the server status, it's fixed
+            </div>
           </Paper>
         </Grid>
       </Grid>
