@@ -1,4 +1,4 @@
-import { initNiod } from "niod";
+import { initNiod, spawnGroupInZone } from "niod";
 import express from "express";
 
 const app = express();
