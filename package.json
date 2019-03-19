@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@types/express": "^4.16.1",
-    "niod": "^1.1.2"
+    "express": "^4.16.4",
+    "niod": "^1.2.0"
   }
 }
