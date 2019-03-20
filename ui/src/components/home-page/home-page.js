@@ -12,7 +12,7 @@ const styles = theme => ({
   }
 });
 
-const Content = props => {
+const HomePage = props => {
   const { classes } = props;
   return (
     <Paper>
@@ -58,8 +58,8 @@ const Content = props => {
   );
 };
 
-Content.propTypes = {
+HomePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Content);
+export default withStyles(styles)(HomePage);

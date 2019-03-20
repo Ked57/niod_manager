@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import "./top-bar.css";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -36,27 +37,31 @@ const TopBar = props => {
       <Drawer open={sidePanel} onClose={onMenuButtonClick}>
         <div tabIndex={0} role="button" onClick={onMenuButtonClick}>
           <List>
-            {["Home"].map((text, index) => (
-              <ListItem button key={text} className={classes.menuItem}>
-                <ListItemText primary={text} />
+            <a href="/">
+              <ListItem button key={"Home"} className={classes.menuItem}>
+                <ListItemText primary={"Home"} />
               </ListItem>
-            ))}
+            </a>
           </List>
           <Divider />
           <List>
             {["Dashboard"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
+              <a href={`/${text.toLowerCase()}`}>
+                <ListItem button key={text}>
+                  <ListItemText primary={text} />
+                </ListItem>
+              </a>
             ))}
           </List>
           <Divider />
           <List>
             {["A2A Dispatcher", "Triggers", "Spawn in zone"].map(
               (text, index) => (
-                <ListItem button key={text}>
-                  <ListItemText primary={text} />
-                </ListItem>
+                <a href={`/${text.toLowerCase().replace(" ", "_")}`}>
+                  <ListItem button key={text}>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                </a>
               )
             )}
           </List>
