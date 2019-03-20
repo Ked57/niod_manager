@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import "./app.css";
 import Grid from "@material-ui/core/Grid";
 import TopBar from "../top-bar/top-bar";
-import Menu from "../menu/menu";
 import Content from "../content/content";
 import ServerStatus from "../server-status/server-status";
 
