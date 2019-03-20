@@ -41,6 +41,14 @@ const TopBar = props => {
           </List>
           <Divider />
           <List>
+            {["Dashboard"].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
             {["A2A Dispatcher", "Triggers", "Spawn in zone"].map(
               (text, index) => (
                 <ListItem button key={text}>

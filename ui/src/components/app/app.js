@@ -17,10 +17,13 @@ const App = props => {
   return (
     <div className="App">
       <TopBar />
-      <Grid container spacing={32} justify="center">
+      <Grid container justify="center">
+        <Grid item xs={1} />
         <Grid item xs={7}>
           <Content />
         </Grid>
+
+        <Grid item xs={1} />
         <Grid item xs={2}>
           <ServerStatus />
         </Grid>

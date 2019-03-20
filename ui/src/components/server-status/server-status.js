@@ -49,6 +49,40 @@ const ServerStatus = props => {
         <Grid item>Players online: {serverStatus.playersOnline}</Grid>
         <Grid item>Map: {serverStatus.map}</Grid>
         <Grid item>Mission : {serverStatus.missionName}</Grid>
+        <Grid item>
+          Blue:
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="flex-start"
+            className={classes.paperContent}
+          >
+            <Grid item>
+              Airfields:{" "}
+              {serverStatus.blue.airfields.map(airfield => `${airfield} `)}
+            </Grid>
+            <Grid item>Players alive: {serverStatus.blue.playersAlive}</Grid>
+            <Grid item>Total slots: {serverStatus.blue.totalSlots}</Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          Red:
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="flex-start"
+            className={classes.paperContent}
+          >
+            <Grid item>
+              Airfields:{" "}
+              {serverStatus.red.airfields.map(airfield => `${airfield} `)}
+            </Grid>
+            <Grid item>Players alive: {serverStatus.red.playersAlive}</Grid>
+            <Grid item>Total slots: {serverStatus.red.totalSlots}</Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </Paper>
   );
