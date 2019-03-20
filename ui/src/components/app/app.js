@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import TopBar from "../top-bar/top-bar";
 import Content from "../content/content";
 import ServerStatus from "../server-status/server-status";
+import Footer from "../footer/footer";
 
 const styles = theme => ({
   root: {
@@ -13,7 +14,7 @@ const styles = theme => ({
   }
 });
 
-const App = props => {
+const App = () => {
   return (
     <div className="App">
       <TopBar />
@@ -27,6 +28,12 @@ const App = props => {
         <Grid item xs={2}>
           <ServerStatus />
         </Grid>
+        <Grid item xs={1} />
+        <Grid item xs={7}>
+          <Footer />
+        </Grid>
+        <Grid item xs={1} />
+        <Grid item xs={2} />
       </Grid>
     </div>
   );

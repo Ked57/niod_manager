@@ -17,6 +17,9 @@ const styles = () => ({
     marginLeft: -12,
     marginRight: 20
   },
+  menuItem: {
+    paddingRight: 200
+  },
   grow: {
     flexGrow: 1
   }
@@ -34,7 +37,7 @@ const TopBar = props => {
         <div tabIndex={0} role="button" onClick={onMenuButtonClick}>
           <List>
             {["Home"].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem button key={text} className={classes.menuItem}>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
