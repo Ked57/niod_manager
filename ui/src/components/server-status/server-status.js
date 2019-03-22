@@ -39,18 +39,18 @@ const ServerStatus = props => {
         className={classes.paperContent}
       >
         <Grid item>
-          Server status:{" "}
+          Server status :{" "}
           {serverStatus.serverOnline ? (
             <span className={[classes.dot, classes.green].join(" ")} />
           ) : (
             <span className={[classes.dot, classes.red].join(" ")} />
           )}
         </Grid>
-        <Grid item>Players online: {serverStatus.playersOnline}</Grid>
-        <Grid item>Map: {serverStatus.map}</Grid>
+        <Grid item>Players online : {serverStatus.playersOnline}</Grid>
+        <Grid item>Map : {serverStatus.map}</Grid>
         <Grid item>Mission : {serverStatus.missionName}</Grid>
         <Grid item>
-          Blue:
+          Blue :
           <Grid
             container
             direction="column"
@@ -59,15 +59,15 @@ const ServerStatus = props => {
             className={classes.paperContent}
           >
             <Grid item>
-              Airfields:{" "}
+              Airfields :{" "}
               {serverStatus.blue.airfields.map(airfield => `${airfield} `)}
             </Grid>
-            <Grid item>Players alive: {serverStatus.blue.playersAlive}</Grid>
-            <Grid item>Total slots: {serverStatus.blue.totalSlots}</Grid>
+            <Grid item>Players alive : {serverStatus.blue.playersAlive}</Grid>
+            <Grid item>Total slots : {serverStatus.blue.totalSlots}</Grid>
           </Grid>
         </Grid>
         <Grid item>
-          Red:
+          Red :
           <Grid
             container
             direction="column"
@@ -76,11 +76,11 @@ const ServerStatus = props => {
             className={classes.paperContent}
           >
             <Grid item>
-              Airfields:{" "}
+              Airfields :{" "}
               {serverStatus.red.airfields.map(airfield => `${airfield} `)}
             </Grid>
-            <Grid item>Players alive: {serverStatus.red.playersAlive}</Grid>
-            <Grid item>Total slots: {serverStatus.red.totalSlots}</Grid>
+            <Grid item>Players alive : {serverStatus.red.playersAlive}</Grid>
+            <Grid item>Total slots : {serverStatus.red.totalSlots}</Grid>
           </Grid>
         </Grid>
       </Grid>

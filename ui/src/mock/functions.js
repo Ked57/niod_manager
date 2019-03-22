@@ -48,7 +48,7 @@ export const mockFunctions = [
         }
       ]
     },
-    callback: () => console.log("dispatcher added")
+    type: "A2ADispatcher"
   },
   {
     name: "addA2ADispatcher",
@@ -99,6 +99,6 @@ export const mockFunctions = [
         }
       ]
     },
-    callback: () => console.log("A2ADispatcher added")
+    type: "A2ADispatcher"
   }
 ];

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Paper from "@material-ui/core/Paper";
 import { fetch } from "../../functions/fetcher";
+import A2ADispatcher from "../niod-instructions/a2a-dispatcher.js/a2adispatcher";
 
 const styles = theme => ({
   paperContent: {
@@ -23,6 +24,17 @@ const styles = theme => ({
   }
 });
 
+const switchComponent = (type, args) => {
+  const typeComponent = {
+    A2ADispatcher: <A2ADispatcher data={args} />
+  };
+  return typeComponent[type] ? (
+    typeComponent[type]
+  ) : (
+    <p>Error: Component wasn't found</p>
+  );
+};
+
 const Dashboard = props => {
   const { classes } = props;
   const niodInstructions = fetch("/api/functions", {}, true);
@@ -37,19 +49,7 @@ const Dashboard = props => {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Detection :
-              <ul>
-                <li>
-                  Prefixes
-                  <ul>
-                    {niodInstruction.data.detection.prefixes.reduce(
-                      prefix => `<li>${prefix}</li>`
-                    )}
-                  </ul>
-                </li>
-                <li>Range : {niodInstruction.data.detection.range} m</li>
-              </ul>
-              Border group name : {niodInstruction.data.border.name}
+              {switchComponent(niodInstruction.type, niodInstruction.data)}
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
