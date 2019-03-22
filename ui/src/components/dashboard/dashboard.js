@@ -37,9 +37,19 @@ const Dashboard = props => {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+              Detection :
+              <ul>
+                <li>
+                  Prefixes
+                  <ul>
+                    {niodInstruction.data.detection.prefixes.reduce(
+                      prefix => `<li>${prefix}</li>`
+                    )}
+                  </ul>
+                </li>
+                <li>Range : {niodInstruction.data.detection.range} m</li>
+              </ul>
+              Border group name : {niodInstruction.data.border.name}
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
