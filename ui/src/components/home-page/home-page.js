@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Prism from "prismjs";
+import "../../prism.css";
 
 const styles = theme => ({
   paperContent: {
@@ -14,10 +16,51 @@ const styles = theme => ({
 
 const HomePage = props => {
   const { classes } = props;
+  Prism.highlightAll();
   return (
     <Paper className={classes.paperContent}>
       <h1 align="center">Welcome to NIOD Manager</h1>
       <h2>Getting started</h2>
+      <h3>Installation</h3>
+      <p>
+        First you need to install nodejs. Then start a new project with{" "}
+        <pre>
+          <code className="language-markup">{`npm init`}</code>
+        </pre>{" "}
+        Then do{" "}
+        <pre>
+          <code className="language-markup">{`npm install niod`}</code>
+        </pre>{" "}
+        Then create a file that is named
+        <pre>
+          <code className="language-markup">{`index.js`}</code>
+        </pre>{" "}
+        And start coding{" "}
+        <pre>
+          <code className="language-javascript">
+            {`const { initNiod, addA2ADispatcher} = require("niod");
+initNiod().then(() => {
+    addA2ADispatcher({ 
+        //the a2adispatcher arguments
+      }, () => console.log("dispatcher created")
+    );
+});`}
+          </code>
+        </pre>{" "}
+        And of course modify "MissionScripting.lua" file in the DCS installation
+        folder <br />
+        (C:/Program Files/Eagle Dynamics/Scripts/MissionScripting.lua), replace{" "}
+        <pre>
+          <code className="language-lua">{`require = nil`}</code>
+        </pre>{" "}
+        by{" "}
+        <pre>
+          <code className="language-lua">{`--require = nil`}</code>
+        </pre>{" "}
+        Download niod.lua from here:{" "}
+        <a href="https://github.com/Ked57/NIOD/releases">NIOD releases </a>
+      </p>
+      <h3>Use NIOD Manager</h3>
       <p>
         You can check that your server is started by checking the server status
         on your right and make sure it's green
@@ -41,9 +84,7 @@ const HomePage = props => {
       </p>
       <p>
         I hope you have fun with NIOD, report issues at :{" "}
-        <a href="https://github.com/ked57/NIOD/issues">
-          https://github.com/ked57/NIOD/issues
-        </a>
+        <a href="https://github.com/ked57/NIOD/issues">issues</a>
       </p>
     </Paper>
   );
