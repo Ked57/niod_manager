@@ -35,20 +35,8 @@ const HomePage = props => {
         <pre>
           <code className="language-markup">{`index.js`}</code>
         </pre>{" "}
-        And start coding{" "}
-        <pre>
-          <code className="language-javascript">
-            {`const { initNiod, addA2ADispatcher} = require("niod");
-initNiod().then(() => {
-    addA2ADispatcher({ 
-        //the a2adispatcher arguments
-      }, () => console.log("dispatcher created")
-    );
-});`}
-          </code>
-        </pre>{" "}
-        And of course modify "MissionScripting.lua" file in the DCS installation
-        folder <br />
+        Then modify "MissionScripting.lua" file in the DCS installation folder{" "}
+        <br />
         (C:/Program Files/Eagle Dynamics/Scripts/MissionScripting.lua), replace{" "}
         <pre>
           <code className="language-lua">{`require = nil`}</code>
