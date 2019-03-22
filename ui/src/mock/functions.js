@@ -1,6 +1,6 @@
 export const mockFunctions = [
   {
-    name: "addA2ADispatcher",
+    name: "russianA2ADispatcher",
     data: {
       name: "russianA2ADispatcher",
       detection: {
@@ -48,10 +48,10 @@ export const mockFunctions = [
         }
       ]
     },
-    type: "A2ADispatcher"
+    type: "addA2ADispatcher"
   },
   {
-    name: "addA2ADispatcher",
+    name: "usaA2ADispatcher",
     data: {
       name: "usaA2ADispatcher",
       detection: {
@@ -99,6 +99,26 @@ export const mockFunctions = [
         }
       ]
     },
-    type: "A2ADispatcher"
+    type: "addA2ADispatcher"
+  },
+  {
+    name: "spawnGroupTest1",
+    data: { groupName: "template" },
+    type: "spawnGroup"
+  },
+  {
+    name: "spawnGroupInZoneTest1",
+    data: { groupName: "template", zoneName: "zone" },
+    type: "spawnGroupInZone"
+  },
+  {
+    name: "triggerTest",
+    data: {
+      type: "GroupPartlyOrCompletelyInZone",
+      groupName: "testGroup",
+      zoneName: "zone",
+      frequency: "once"
+    },
+    type: "trigger"
   }
 ];

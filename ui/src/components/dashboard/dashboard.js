@@ -8,7 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Paper from "@material-ui/core/Paper";
 import { fetch } from "../../functions/fetcher";
-import A2ADispatcher from "../niod-instructions/a2a-dispatcher.js/a2adispatcher";
+import A2ADispatcher from "../niod-instructions/a2a-dispatcher/a2adispatcher";
+import SpawnGroup from "../niod-instructions/spawn-group/spawn-group";
+import SpawnGroupInZone from "../niod-instructions/spawn-group-in-zone/spawn-group-in-zone";
+import Trigger from "../niod-instructions/trigger/trigger";
 
 const styles = theme => ({
   paperContent: {
@@ -26,7 +29,10 @@ const styles = theme => ({
 
 const switchComponent = (type, args) => {
   const typeComponent = {
-    A2ADispatcher: <A2ADispatcher data={args} />
+    addA2ADispatcher: <A2ADispatcher data={args} />,
+    spawnGroup: <SpawnGroup data={args} />,
+    spawnGroupInZone: <SpawnGroupInZone data={args} />,
+    trigger: <Trigger data={args} />
   };
   return typeComponent[type] ? (
     typeComponent[type]
@@ -44,7 +50,7 @@ const Dashboard = props => {
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>
-              {niodInstruction.data.name}
+              {niodInstruction.name}
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
