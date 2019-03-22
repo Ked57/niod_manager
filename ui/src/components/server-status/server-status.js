@@ -27,7 +27,7 @@ const styles = theme => ({
 const ServerStatus = props => {
   const { classes } = props;
   const [serverStatus, setServerStatus] = useState(
-    fetch("/server/status", {}, true)
+    fetch("/api/server/status", {}, true)
   );
   return (
     <Paper>
