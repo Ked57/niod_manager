@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 const A2ADispatcher = props => {
   const data = props.data;
   return (
-    <p>
+    <div>
       Detection :
       <List>
         <ListItem>
@@ -20,7 +20,8 @@ const A2ADispatcher = props => {
       </List>
       Border group name : {data.border.name}
       <br />
-      Engage radius : {data.engageRadius} m<br />
+      Engage radius : {data.engageRadius} m
+      <br />
       Squadrons :
       <List>
         {data.squadrons.map(squadron => (
@@ -34,8 +35,8 @@ const A2ADispatcher = props => {
               <ListItem>Landing method : {squadron.landingMethod}</ListItem>
 
               {squadron.cap ? (
-                <p>
-                  <ListItem>CAP :</ListItem>{" "}
+                <div>
+                  <ListItem>CAP :</ListItem>
                   <ListItem>
                     <List>
                       <ListItem>Zone Name : {squadron.cap.zoneName}</ListItem>
@@ -76,9 +77,9 @@ const A2ADispatcher = props => {
                       </ListItem>
                     </List>
                   </ListItem>
-                </p>
+                </div>
               ) : (
-                <p>
+                <div>
                   <ListItem>GCI :</ListItem>
                   <ListItem>
                     <List>
@@ -92,13 +93,13 @@ const A2ADispatcher = props => {
                       </ListItem>
                     </List>
                   </ListItem>
-                </p>
+                </div>
               )}
             </List>
           </ListItem>
         ))}
       </List>
-    </p>
+    </div>
   );
 };
 

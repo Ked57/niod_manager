@@ -2,7 +2,7 @@ import React from "react";
 
 const SpawnGroup = props => {
   const data = props.data;
-  return <p>Template : {data.groupName}</p>;
+  return <div>Template : {data.groupName}</div>;
 };
 
 export default SpawnGroup;

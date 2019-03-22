@@ -6,6 +6,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Paper from "@material-ui/core/Paper";
 import { fetch } from "../../functions/fetcher";
 import A2ADispatcher from "../niod-instructions/a2a-dispatcher/a2adispatcher";
@@ -54,9 +55,7 @@ const Dashboard = props => {
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              {switchComponent(niodInstruction.type, niodInstruction.data)}
-            </Typography>
+            {switchComponent(niodInstruction.type, niodInstruction.data)}
           </ExpansionPanelDetails>
         </ExpansionPanel>
       ))}

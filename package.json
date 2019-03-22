@@ -4,7 +4,7 @@
   "description": "Web manager for NIOD",
   "main": "./dist/app.js",
   "scripts": {
-    "start": "npm run build:client && npm run build && npm run serve",
+    "start": "npm run build:client && npm run build:server && npm run serve",
     "start:server": "npm run build:server && npm run serve",
     "build:server": "tsc",
     "serve": "node ./dist/app.js",
