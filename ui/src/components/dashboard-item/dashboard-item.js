@@ -26,8 +26,8 @@ const DashboardItem = props => {
   const data = props.data;
   const { classes } = props;
 
-  const higherItem = name => console.log(`Higher ${name}`);
-  const lowerItem = name => console.log(`Lower ${name}`);
+  const higherItem = name => data.moveUp(name);
+  const lowerItem = name => data.moveDown(name);
 
   return (
     <Paper className={classes.paper}>
