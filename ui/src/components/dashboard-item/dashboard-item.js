@@ -4,11 +4,21 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = theme => ({
-  paperContent: {
+  paper: {
     margin: 10,
     padding: 10
+  },
+  paperContent: {
+    display: "flex",
+    "justify-content": "space-between"
+  },
+  link: {
+    "text-decoration": "none",
+    width: "100%",
+    color: "black"
   }
 });
 
@@ -16,11 +26,32 @@ const DashboardItem = props => {
   const data = props.data;
   const { classes } = props;
 
+  const higherItem = name => console.log(`Higher ${name}`);
+  const lowerItem = name => console.log(`Lower ${name}`);
+
   return (
-    <Paper className={classes.paperContent}>
-      <a href={`/${data.type}/${data.name}`}>{data.name}</a>
-      <ExpandLessIcon />
-      <ExpandMoreIcon />
+    <Paper className={classes.paper}>
+      <div className={classes.paperContent}>
+        <a className={classes.link} href={`/${data.type}/${data.name}`}>
+          {data.name}
+        </a>
+        <div>
+          <IconButton
+            color="inherit"
+            aria-label="Higher"
+            onClick={() => higherItem(data.name)}
+          >
+            <ExpandLessIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="Lesser"
+            onClick={() => lowerItem(data.name)}
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </div>
+      </div>
     </Paper>
   );
 };
