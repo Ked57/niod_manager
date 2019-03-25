@@ -9,8 +9,9 @@ const A2ADispatcher = props => {
       Detection :
       <List>
         <ListItem>
-          Prefixes
+          Prefixes :
           <List>
+            {" "}
             {data.detection.prefixes.reduce(
               prefix => `<ListItem>${prefix}</ListItem>`
             )}

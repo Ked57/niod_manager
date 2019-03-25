@@ -1,18 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Paper from "@material-ui/core/Paper";
 import { fetch } from "../../functions/fetcher";
 import A2ADispatcher from "../niod-instructions/a2a-dispatcher/a2adispatcher";
 import SpawnGroup from "../niod-instructions/spawn-group/spawn-group";
 import SpawnGroupInZone from "../niod-instructions/spawn-group-in-zone/spawn-group-in-zone";
 import Trigger from "../niod-instructions/trigger/trigger";
+import DashboardItem from "../dashboard-item/dashboard-item";
 
 const styles = theme => ({
   paperContent: {
@@ -48,16 +43,9 @@ const Dashboard = props => {
   return (
     <Paper className={classes.paperContent}>
       {niodInstructions.map(niodInstruction => (
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>
-              {niodInstruction.name}
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            {switchComponent(niodInstruction.type, niodInstruction.data)}
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+        <DashboardItem
+          data={{ type: niodInstruction.type, name: niodInstruction.data.name }}
+        />
       ))}
     </Paper>
   );
