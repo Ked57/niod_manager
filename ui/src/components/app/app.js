@@ -10,6 +10,7 @@ import Footer from "../footer/footer";
 import HomePage from "../home-page/home-page";
 import Dashboard from "../dashboard/dashboard";
 import NoMatch from "../no-match/no-match";
+import a2adispatcher from "../niod-instructions/a2a-dispatcher/a2adispatcher";
 
 const styles = theme => ({
   root: {
@@ -28,6 +29,7 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/dashboard" exact component={Dashboard} />
+              <Route path="/addA2ADispatcher/:name" component={a2adispatcher} />
               <Route component={NoMatch} />
             </Switch>
           </Grid>

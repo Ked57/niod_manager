@@ -1,9 +1,26 @@
 import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import TextField from "@material-ui/core/TextField";
+import PropTypes from "prop-types";
+import { fetch } from "../../../functions/fetcher";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  }
+});
 
 const A2ADispatcher = props => {
-  const data = props.data;
+  const name = props.match.params.name;
+  console.log(name);
+  const data = fetch("/api/addA2ADispatcher", { name }, true).find(
+    element => element.name === name
+  ).data;
+  console.log("data", data);
+  const { classes } = props;
   return (
     <div>
       Detection :
@@ -17,7 +34,18 @@ const A2ADispatcher = props => {
             )}
           </List>
         </ListItem>
-        <ListItem>Range : {data.detection.range} m</ListItem>
+        <ListItem>
+          <TextField
+            id="outlined-range-input"
+            label="Range (m)"
+            className={classes.textField}
+            autoComplete="current-password"
+            margin="normal"
+            variant="outlined"
+          >
+            {data.detection.range}
+          </TextField>{" "}
+        </ListItem>
       </List>
       Border group name : {data.border.name}
       <br />
@@ -104,4 +132,8 @@ const A2ADispatcher = props => {
   );
 };
 
-export default A2ADispatcher;
+A2ADispatcher.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(A2ADispatcher);

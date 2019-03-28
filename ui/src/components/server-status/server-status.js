@@ -29,6 +29,7 @@ const ServerStatus = props => {
   const [serverStatus, setServerStatus] = useState(
     fetch("/api/server/status", {}, true)
   );
+  console.log("server status", serverStatus);
   return (
     <Paper>
       <Grid

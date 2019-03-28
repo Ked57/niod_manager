@@ -36,7 +36,6 @@ const Dashboard = props => {
           niodInstructions.splice(i, 0, deletedElement1[0]);
           const deletedElement2 = niodInstructions.splice(i, 1);
           niodInstructions.splice(i - 1, 0, deletedElement2[0]);
-          console.log(niodInstructions);
           return;
         }
       }
@@ -56,7 +55,6 @@ const Dashboard = props => {
           niodInstructions.splice(i, 0, deletedElement1[0]);
           const deletedElement2 = niodInstructions.splice(i, 1);
           niodInstructions.splice(i + 1, 0, deletedElement2[0]);
-          console.log(niodInstructions);
           return;
         }
       }
