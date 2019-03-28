@@ -2,36 +2,63 @@ import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+import RemoveCircleRounded from "@material-ui/icons/RemoveCircleRounded";
+import IconButton from "@material-ui/core/IconButton";
 import PropTypes from "prop-types";
 import { fetch } from "../../../functions/fetcher";
 import { withStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
+  },
+  paper: {
+    margin: 10,
+    padding: 10
   }
 });
 
 const A2ADispatcher = props => {
   const name = props.match.params.name;
-  console.log(name);
   const data = fetch("/api/addA2ADispatcher", { name }, true).find(
     element => element.name === name
   ).data;
-  console.log("data", data);
   const { classes } = props;
+  const onButtonAddPrefixClick = () => console.log("add button clicked");
   return (
-    <div>
-      Detection :
+    <Paper className={classes.paper}>
+      Detection
       <List>
         <ListItem>
-          Prefixes :
+          <TextField
+            id="outlined-range-input"
+            label="Add a prefix"
+            className={classes.textField}
+            margin="normal"
+            variant="outlined"
+          />
+          <Button onClick={onButtonAddPrefixClick}>Add</Button>
+        </ListItem>
+        <ListItem>
           <List>
-            {" "}
-            {data.detection.prefixes.reduce(
-              prefix => `<ListItem>${prefix}</ListItem>`
-            )}
+            Prefixes
+            {data.detection.prefixes.map(prefix => (
+              <ListItem>
+                <Paper className={classes.paper}>
+                  {prefix}{" "}
+                  <IconButton
+                    color="inherit"
+                    aria-label="Higher"
+                    onClick={() => console.log(prefix)}
+                  >
+                    <RemoveCircleRounded />
+                  </IconButton>
+                </Paper>
+              </ListItem>
+            ))}
           </List>
         </ListItem>
         <ListItem>
@@ -39,7 +66,6 @@ const A2ADispatcher = props => {
             id="outlined-range-input"
             label="Range (m)"
             className={classes.textField}
-            autoComplete="current-password"
             margin="normal"
             variant="outlined"
           >
@@ -47,16 +73,42 @@ const A2ADispatcher = props => {
           </TextField>{" "}
         </ListItem>
       </List>
-      Border group name : {data.border.name}
+      <TextField
+        id="outlined-range-input"
+        label="Border group name"
+        className={classes.textField}
+        margin="normal"
+        variant="outlined"
+      >
+        {data.border.name}
+      </TextField>
       <br />
-      Engage radius : {data.engageRadius} m
+      <TextField
+        id="outlined-range-input"
+        label="Engage radius (m)"
+        className={classes.textField}
+        margin="normal"
+        variant="outlined"
+      >
+        {data.engageRadius}
+      </TextField>
       <br />
       Squadrons :
       <List>
         {data.squadrons.map(squadron => (
           <ListItem>
             <List>
-              <ListItem>Name : {squadron.name}</ListItem>
+              <ListItem>
+                <TextField
+                  id="outlined-range-input"
+                  label="Name"
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                >
+                  {squadron.name}
+                </TextField>
+              </ListItem>
               <ListItem>Map : {squadron.map}</ListItem>
               <ListItem>Airbase : {squadron.airbase}</ListItem>
               <ListItem>Group Length : {squadron.groupLength}</ListItem>
@@ -128,7 +180,7 @@ const A2ADispatcher = props => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </Paper>
   );
 };
 
