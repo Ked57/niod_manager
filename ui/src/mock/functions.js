@@ -15,6 +15,7 @@ export const mockFunctions = [
         {
           name: "RUSSIAN_SQUADRON_MIG",
           map: "Caucasus",
+          type: "cap",
           airbase: "Anapa_Vityazevo",
           groupLength: 2,
           takeofMethod: "Runway",
@@ -37,6 +38,7 @@ export const mockFunctions = [
         {
           name: "RUSSIAN_SQUADRON_SU-27",
           map: "Caucasus",
+          type: "gci",
           airbase: "Gelendzhik",
           groupLength: 2,
           takeofMethod: "Runway",
@@ -66,6 +68,7 @@ export const mockFunctions = [
         {
           name: "USA_SQUADRON_F18",
           map: "Caucasus",
+          type: "cap",
           airbase: "Krasnodar_Pashkovsky",
           groupLength: 2,
           takeofMethod: "Runway",
@@ -88,6 +91,7 @@ export const mockFunctions = [
         {
           name: "USA_SQUADRON_F15",
           map: "Caucasus",
+          type: "gci",
           airbase: "Maykop_Khanskaya",
           groupLength: 2,
           takeofMethod: "Runway",

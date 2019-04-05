@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import TextField from "@material-ui/core/TextField";
@@ -39,11 +39,42 @@ const A2ADispatcher = props => {
     element => element.name === name
   ).data;
   const { classes } = props;
-  const onButtonAddPrefixClick = () => console.log("add prefix button clicked");
+  const [forceRerender, setForceRerender] = useState(false);
+  const [dispatcherData, setDispatcherData] = useState(data);
+  const [addPrefixField, setAddPrefixField] = useState("");
+  const onButtonAddPrefixClick = () => {
+    if (addPrefixField === "") {
+      console.error("Can't add an empty prefix");
+      return;
+    }
+    dispatcherData.detection.prefixes.push(addPrefixField);
+    setAddPrefixField("");
+  };
+  const onButtonRemovePrefixClick = prefix => {
+    const indexOfPrefix = dispatcherData.detection.prefixes.indexOf(prefix);
+    dispatcherData.detection.prefixes.splice(indexOfPrefix, 1);
+    setForceRerender(!forceRerender);
+  };
   const onButtonAddSquadronClick = () =>
     console.log("add squadron button clicked");
   const onRemoveSquadronButtonPressed = () =>
     console.log("remove squadron button clicked");
+  const onSquadronTypeChange = (e, squadron) => {
+    squadron.type = e.target.value;
+    if (!squadron[e.target.value]) {
+      squadron[e.target.value] = {};
+    }
+    const dispatcherDataCopy = { ...dispatcherData };
+    const sq = dispatcherDataCopy.squadrons.find(
+      sq => sq.name === squadron.name
+    );
+    if (!sq) {
+      console.error("Couldn't find selected squadron");
+      return;
+    }
+    Object.assign(sq, squadron);
+    setDispatcherData(dispatcherDataCopy);
+  };
   return (
     <Paper className={classes.paper}>
       <Typography variant="h4">A2ADispatcher Editor</Typography>
@@ -55,6 +86,7 @@ const A2ADispatcher = props => {
               id="outlined-range-input"
               label="Add a prefix"
               className={classes.textField}
+              onChange={e => setAddPrefixField(e.target.value)}
               margin="normal"
               variant="outlined"
             />
@@ -65,13 +97,13 @@ const A2ADispatcher = props => {
           <ListItem>
             <List>
               <Typography variant="h6">Prefixes</Typography>
-              {data.detection.prefixes.map(prefix => (
+              {dispatcherData.detection.prefixes.map(prefix => (
                 <ListItem>
                   <Paper className={classes.paper}>
                     {prefix}{" "}
                     <IconButton
                       aria-label="Higher"
-                      onClick={() => console.log(prefix)}
+                      onClick={() => onButtonRemovePrefixClick(prefix)}
                     >
                       <RemoveRounded />
                     </IconButton>
@@ -87,7 +119,7 @@ const A2ADispatcher = props => {
               className={classes.textField}
               margin="normal"
               variant="outlined"
-              defaultValue={data.detection.range}
+              defaultValue={dispatcherData.detection.range}
             />
           </ListItem>
         </List>
@@ -101,7 +133,7 @@ const A2ADispatcher = props => {
               className={classes.textField}
               margin="normal"
               variant="outlined"
-              defaultValue={data.border.name}
+              defaultValue={dispatcherData.border.name}
             />
           </ListItem>
           <ListItem>
@@ -111,7 +143,7 @@ const A2ADispatcher = props => {
               className={classes.textField}
               margin="normal"
               variant="outlined"
-              defaultValue={data.engageRadius}
+              defaultValue={dispatcherData.engageRadius}
             />
           </ListItem>
         </List>
@@ -125,7 +157,7 @@ const A2ADispatcher = props => {
         </Typography>
 
         <List>
-          {data.squadrons.map(squadron => (
+          {dispatcherData.squadrons.map(squadron => (
             <Paper className={classes.paper}>
               <div className={classes.alignRight}>
                 <IconButton
@@ -216,12 +248,26 @@ const A2ADispatcher = props => {
                       </Select>
                     </div>
                   </ListItem>
-
-                  {squadron.cap ? (
+                  <ListItem>
+                    <div className={classes.selectDiv}>
+                      <Typography variant="h5">Squadron type</Typography>
+                      <br />
+                      <Select
+                        native
+                        value={squadron.type}
+                        onChange={e => onSquadronTypeChange(e, squadron)}
+                        inputProps={{
+                          name: "Squadron type",
+                          id: "st-method"
+                        }}
+                      >
+                        <option value={"cap"}>CAP</option>
+                        <option value={"gci"}>GCI</option>
+                      </Select>
+                    </div>
+                  </ListItem>
+                  {squadron.type === "cap" ? (
                     <div>
-                      <ListItem>
-                        <Typography variant="h6">CAP</Typography>
-                      </ListItem>
                       <ListItem>
                         <List>
                           <ListItem>
@@ -357,9 +403,6 @@ const A2ADispatcher = props => {
                     </div>
                   ) : (
                     <div>
-                      <ListItem>
-                        <Typography variant="h6">GCI</Typography>
-                      </ListItem>
                       <ListItem>
                         <List>
                           <ListItem>
