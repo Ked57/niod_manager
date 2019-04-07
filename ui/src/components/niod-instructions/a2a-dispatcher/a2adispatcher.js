@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import TextField from "@material-ui/core/TextField";
@@ -39,26 +39,84 @@ const A2ADispatcher = props => {
     element => element.name === name
   ).data;
   const { classes } = props;
-  const [forceRerender, setForceRerender] = useState(false);
-  const [dispatcherData, setDispatcherData] = useState(data);
   const [addPrefixField, setAddPrefixField] = useState("");
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "addPrefix":
+        return {
+          ...state,
+          ...{
+            detection: {
+              prefixes: [...state.detection.prefixes, action.addPrefixField]
+            }
+          }
+        };
+      case "removePrefix":
+        const indexOfPrefix = state.detection.prefixes.indexOf(action.prefix);
+        if (indexOfPrefix >= 0) {
+          state.detection.prefixes.splice(indexOfPrefix, 1);
+        }
+        return { ...state };
+      case "addSquadron":
+        return {
+          ...state,
+          ...{
+            squadrons: [
+              ...state.squadrons,
+              {
+                name: "",
+                map: "",
+                type: "cap",
+                airbase: "",
+                groupLength: 0,
+                takeofMethod: "Runway",
+                landingMethod: "Runway",
+                cap: {
+                  zoneName: "",
+                  minCAPAlt: 0,
+                  maxCAPAlt: 0,
+                  minCAPSpeed: 0,
+                  maxCAPSPeed: 0,
+                  minCAPInterceptSpeed: 0,
+                  maxCAPInterceptSpeed: 0,
+                  mesureType: "RADIO",
+                  numberPerGroup: 0,
+                  lowerCheckTime: 0,
+                  upperCheckTime: 0,
+                  decisionWeight: 1
+                }
+              }
+            ]
+          }
+        };
+      case "removeSquadron":
+        const indexOfSquadron = state.squadrons.indexOf(action.squadron);
+        if (indexOfSquadron >= 0) {
+          state.squadrons.splice(indexOfSquadron, 1);
+        }
+        return { ...state };
+      default:
+        throw new Error("invalid action on state");
+    }
+  };
+  const [dispatcherData, setDispatcherData] = useReducer(reducer, data);
+  const [detectionRange, setDetectionRange] = useState(
+    dispatcherData.detection.range
+  );
   const onButtonAddPrefixClick = () => {
     if (addPrefixField === "") {
       console.error("Can't add an empty prefix");
       return;
     }
-    dispatcherData.detection.prefixes.push(addPrefixField);
-    setAddPrefixField("");
+    setDispatcherData({ type: "addPrefix", addPrefixField });
   };
   const onButtonRemovePrefixClick = prefix => {
-    const indexOfPrefix = dispatcherData.detection.prefixes.indexOf(prefix);
-    dispatcherData.detection.prefixes.splice(indexOfPrefix, 1);
-    setForceRerender(!forceRerender);
+    setDispatcherData({ type: "removePrefix", prefix });
   };
   const onButtonAddSquadronClick = () =>
-    console.log("add squadron button clicked");
-  const onRemoveSquadronButtonPressed = () =>
-    console.log("remove squadron button clicked");
+    setDispatcherData({ type: "addSquadron" });
+  const onRemoveSquadronButtonPressed = squadron =>
+    setDispatcherData({ type: "removeSquadron", squadron });
   const onSquadronTypeChange = (e, squadron) => {
     squadron.type = e.target.value;
     if (!squadron[e.target.value]) {
@@ -119,7 +177,8 @@ const A2ADispatcher = props => {
               className={classes.textField}
               margin="normal"
               variant="outlined"
-              defaultValue={dispatcherData.detection.range}
+              onChange={e => setDetectionRange(e.target.value)}
+              defaultValue={detectionRange}
             />
           </ListItem>
         </List>
@@ -162,7 +221,7 @@ const A2ADispatcher = props => {
               <div className={classes.alignRight}>
                 <IconButton
                   aria-label="Higher"
-                  onClick={onRemoveSquadronButtonPressed}
+                  onClick={() => onRemoveSquadronButtonPressed(squadron)}
                 >
                   <RemoveRounded />
                 </IconButton>
