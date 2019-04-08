@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Select from "@material-ui/core/Select";
 import { fetch } from "../../../functions/fetcher";
 import { withStyles } from "@material-ui/core/styles";
+import { push, splice } from "immutadot";
 
 const styles = theme => ({
   textField: {
@@ -43,58 +44,43 @@ const A2ADispatcher = props => {
   const reducer = (state, action) => {
     switch (action.type) {
       case "addPrefix":
-        return {
-          ...state,
-          ...{
-            detection: {
-              prefixes: [...state.detection.prefixes, action.addPrefixField]
-            }
-          }
-        };
+        return push(state, "detection.prefixes", action.addPrefixField);
       case "removePrefix":
         const indexOfPrefix = state.detection.prefixes.indexOf(action.prefix);
         if (indexOfPrefix >= 0) {
-          state.detection.prefixes.splice(indexOfPrefix, 1);
+          return splice(state, "detection.prefixes", indexOfPrefix, 1);
         }
-        return { ...state };
+        return state;
       case "addSquadron":
-        return {
-          ...state,
-          ...{
-            squadrons: [
-              ...state.squadrons,
-              {
-                name: "",
-                map: "",
-                type: "cap",
-                airbase: "",
-                groupLength: 0,
-                takeofMethod: "Runway",
-                landingMethod: "Runway",
-                cap: {
-                  zoneName: "",
-                  minCAPAlt: 0,
-                  maxCAPAlt: 0,
-                  minCAPSpeed: 0,
-                  maxCAPSPeed: 0,
-                  minCAPInterceptSpeed: 0,
-                  maxCAPInterceptSpeed: 0,
-                  mesureType: "RADIO",
-                  numberPerGroup: 0,
-                  lowerCheckTime: 0,
-                  upperCheckTime: 0,
-                  decisionWeight: 1
-                }
-              }
-            ]
+        return push(state, "squadrons", {
+          name: "",
+          map: "",
+          type: "cap",
+          airbase: "",
+          groupLength: 0,
+          takeofMethod: "Runway",
+          landingMethod: "Runway",
+          cap: {
+            zoneName: "",
+            minCAPAlt: 0,
+            maxCAPAlt: 0,
+            minCAPSpeed: 0,
+            maxCAPSPeed: 0,
+            minCAPInterceptSpeed: 0,
+            maxCAPInterceptSpeed: 0,
+            mesureType: "RADIO",
+            numberPerGroup: 0,
+            lowerCheckTime: 0,
+            upperCheckTime: 0,
+            decisionWeight: 1
           }
-        };
+        });
       case "removeSquadron":
         const indexOfSquadron = state.squadrons.indexOf(action.squadron);
         if (indexOfSquadron >= 0) {
-          state.squadrons.splice(indexOfSquadron, 1);
+          return splice(state, "squadrons", indexOfSquadron, 1);
         }
-        return { ...state };
+        return state;
       default:
         throw new Error("invalid action on state");
     }
